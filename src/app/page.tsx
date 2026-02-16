@@ -12,6 +12,25 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+function glassCardClassName(extra: string = "") {
+  return [
+    // glass look
+    "bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/50",
+    "border border-border/60",
+    "shadow-sm",
+
+    // hover polish
+    "transition-transform duration-200",
+    "hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-md",
+    "hover:ring-1 hover:ring-slate-900/10",
+
+    // accessibility
+    "motion-reduce:transform-none motion-reduce:transition-none",
+
+    extra,
+  ].join(" ");
+}
+
 export default function Home() {
   return (
     <main className="min-h-dvh bg-background text-foreground">
@@ -160,12 +179,12 @@ export default function Home() {
           </div>
 
           {/* Visual (hero art) */}
-          <Card className="overflow-hidden">
+          <Card className={glassCardClassName("overflow-hidden")}>
             <CardHeader>
               <CardTitle>Leads → Delivery → Growth</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="rounded-xl border bg-muted/30 p-2">
+              <div className="rounded-xl border border-border/60 bg-background/40 backdrop-blur p-2">
                 <Image
                   src="/images/helixflow-hero.png"
                   alt="Helixflow hero illustration"
@@ -202,7 +221,7 @@ export default function Home() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <Card>
+          <Card className={glassCardClassName()}>
             <CardHeader>
               <CardTitle>Pipeline</CardTitle>
             </CardHeader>
@@ -212,7 +231,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className={glassCardClassName()}>
             <CardHeader>
               <CardTitle>Proposals → Onboarding</CardTitle>
             </CardHeader>
@@ -222,7 +241,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className={glassCardClassName()}>
             <CardHeader>
               <CardTitle>AI Assist</CardTitle>
             </CardHeader>
@@ -264,7 +283,7 @@ export default function Home() {
               tag: "Next",
             },
           ].map((u) => (
-            <Card key={u.title}>
+            <Card key={u.title} className={glassCardClassName()}>
               <CardHeader className="flex-row items-start justify-between gap-3">
                 <CardTitle className="text-base">{u.title}</CardTitle>
                 <Badge variant="secondary">{u.tag}</Badge>
@@ -281,7 +300,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-4 py-14" id="get-started">
-        <Card>
+        <Card className={glassCardClassName()}>
           <CardContent className="flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between">
             <div className="space-y-2">
               <h2 className="text-2xl font-semibold tracking-tight">
@@ -353,7 +372,7 @@ function LogoMark({ className = "" }: { className?: string }) {
           strokeLinecap="round"
         />
         <path
-          d="M16.8 16.6c-2.6 2.2-6.9 2.2-9.6 0-2.2-1.8-1.2-4.3 1.2-5.8 1.1-.7 2.4  -1.3 3.8-2 1.6-.8 3.1-1.6 4.1-2.6 2.2-2.1.6-4.8-2.3-5.3-2-.4-4.2.2-5.8 1.5"
+          d="M16.8 16.6c-2.6 2.2-6.9 2.2-9.6 0-2.2-1.8-1.2-4.3 1.2-5.8 1.1-.7 2.4-1.3 3.8-2 1.6-.8 3.1-1.6 4.1-2.6 2.2-2.1.6-4.8-2.3-5.3-2-.4-4.2.2-5.8 1.5"
           stroke="currentColor"
           strokeWidth="2.2"
           strokeLinecap="round"
