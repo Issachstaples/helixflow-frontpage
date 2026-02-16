@@ -1,25 +1,103 @@
+import Image from "next/image";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export default function Home() {
   return (
     <main className="min-h-dvh bg-background text-foreground">
       {/* Top bar */}
-      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-xl border bg-muted" />
-            <div className="leading-tight">
-              <div className="font-semibold">HelixFlow</div>
-              <div className="text-xs text-muted-foreground">
-                A product of Newport E-commerce
+          {/* LEFT: hamburger (mobile) + brand */}
+          <div className="flex items-center gap-3">
+            {/* Mobile hamburger on LEFT */}
+            <div className="sm:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" aria-label="Open menu">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M4 7h16M4 12h16M4 17h16"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </Button>
+                </SheetTrigger>
+
+                <SheetContent side="left" className="w-[320px] sm:w-[360px]">
+                  <SheetHeader>
+                    <SheetTitle className="flex items-center gap-3">
+                      <LogoMark />
+                      <div className="leading-tight">
+                        <div className="font-semibold">Helixflow</div>
+                        <div className="text-xs text-muted-foreground">
+                          A product of Newport E-commerce
+                        </div>
+                      </div>
+                    </SheetTitle>
+                  </SheetHeader>
+
+                  <div className="mt-6 grid gap-2">
+                    {/* Keep menu items as-is */}
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <a href="#updates">Updates</a>
+                    </Button>
+
+                    <Button variant="ghost" className="justify-start" asChild>
+                      <a href="#roadmap">Roadmap</a>
+                    </Button>
+
+                    <div className="my-3 h-px bg-border" />
+
+                    <Button asChild>
+                      <a
+                        href="https://app.helixflow.cloud"
+                        aria-label="Open Helixflow app"
+                      >
+                        Launch App
+                      </a>
+                    </Button>
+
+                    <Button variant="outline" asChild>
+                      <a href="https://coolify.helixflow.cloud">Admin</a>
+                    </Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Brand */}
+            <div className="flex items-center gap-2">
+              <LogoMark />
+              <div className="leading-tight">
+                <div className="font-semibold">Helixflow</div>
+                <div className="text-xs text-muted-foreground">
+                  A product of Newport E-commerce
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* RIGHT: desktop nav */}
+          <div className="hidden sm:flex items-center gap-2">
             <Button variant="ghost" asChild>
               <a href="#updates">Updates</a>
             </Button>
@@ -27,9 +105,19 @@ export default function Home() {
               <a href="#roadmap">Roadmap</a>
             </Button>
             <Button asChild>
-              <a href="https://app.helixflow.cloud" aria-label="Open HelixFlow app">
+              <a
+                href="https://app.helixflow.cloud"
+                aria-label="Open Helixflow app"
+              >
                 Launch App
               </a>
+            </Button>
+          </div>
+
+          {/* RIGHT: mobile CTA */}
+          <div className="sm:hidden">
+            <Button asChild size="sm">
+              <a href="https://app.helixflow.cloud">App</a>
             </Button>
           </div>
         </div>
@@ -42,13 +130,13 @@ export default function Home() {
             <Badge variant="secondary">Coming soon</Badge>
 
             <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              Run your agency like a system — not a scramble.
+              Leads to delivery—then growth on autopilot.
             </h1>
 
             <p className="text-pretty text-lg text-muted-foreground">
-              HelixFlow is a lightweight, AI-assisted CRM built for agencies and
-              service businesses: leads → proposals → onboarding → delivery →
-              follow-up — all in one flow.
+              Helixflow is a lightweight, AI-assisted CRM built for agencies and
+              service businesses. Turn inbound into outcomes, and outcomes into
+              repeat business—inside one system.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -71,25 +159,27 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Visual placeholder */}
+          {/* Visual (hero art) */}
           <Card className="overflow-hidden">
             <CardHeader>
-              <CardTitle>Preview</CardTitle>
+              <CardTitle>Leads → Delivery → Growth</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-3">
-                <div className="h-10 rounded-lg border bg-muted" />
-                <div className="h-28 rounded-lg border bg-muted" />
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="h-24 rounded-lg border bg-muted" />
-                  <div className="h-24 rounded-lg border bg-muted" />
-                </div>
-                <div className="h-24 rounded-lg border bg-muted" />
-                <p className="text-sm text-muted-foreground">
-                  This space will become the live HelixFlow UI preview (or a
-                  product screenshot) once the app is deployed.
-                </p>
+              <div className="rounded-xl border bg-muted/30 p-2">
+                <Image
+                  src="/images/helixflow-hero.png"
+                  alt="Helixflow hero illustration"
+                  width={1536}
+                  height={1152}
+                  priority
+                  className="h-auto w-full rounded-lg"
+                />
               </div>
+
+              <p className="mt-3 text-sm text-muted-foreground">
+                A simple lifecycle: generate leads, deliver consistently, and
+                turn outcomes into growth.
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -102,7 +192,7 @@ export default function Home() {
         <div className="flex items-end justify-between gap-6">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight">
-              What HelixFlow will do
+              What Helixflow will do
             </h2>
             <p className="text-muted-foreground">
               A tight feature set that maps to your real delivery lifecycle.
@@ -170,7 +260,7 @@ export default function Home() {
             },
             {
               title: "App shell next",
-              body: "First HelixFlow app deployment to app.helixflow.cloud.",
+              body: "First Helixflow app deployment to app.helixflow.cloud.",
               tag: "Next",
             },
           ].map((u) => (
@@ -204,7 +294,7 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-3">
               <Button asChild>
-                <a href="mailto:hello@helixflow.cloud?subject=HelixFlow%20Early%20Access">
+                <a href="mailto:hello@helixflow.cloud?subject=Helixflow%20Early%20Access">
                   Request early access
                 </a>
               </Button>
@@ -218,7 +308,9 @@ export default function Home() {
 
       <footer className="border-t">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} HelixFlow. All rights reserved.</div>
+          <div>
+            © {new Date().getFullYear()} Helixflow. All rights reserved.
+          </div>
           <div className="flex gap-4">
             <a className="hover:underline" href="#updates">
               Updates
@@ -233,5 +325,41 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function LogoMark({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={[
+        "relative h-9 w-9 rounded-xl border bg-background/60 backdrop-blur grid place-items-center",
+        className,
+      ].join(" ")}
+      aria-hidden="true"
+    >
+      <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-sky-400/20 via-transparent to-blue-600/20" />
+
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        className="relative text-foreground"
+      >
+        <path
+          d="M7.2 7.4c2.6-2.2 6.9-2.2 9.6 0 2.2 1.8 1.2 4.3-1.2 5.8-1.1.7-2.4 1.3-3.8 2-1.6.8-3.1 1.6-4.1 2.6-2.2 2.1-.6 4.8 2.3 5.3 2 .4 4.2-.2 5.8-1.5"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M16.8 16.6c-2.6 2.2-6.9 2.2-9.6 0-2.2-1.8-1.2-4.3 1.2-5.8 1.1-.7 2.4  -1.3 3.8-2 1.6-.8 3.1-1.6 4.1-2.6 2.2-2.1.6-4.8-2.3-5.3-2-.4-4.2.2-5.8 1.5"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          opacity="0.9"
+        />
+      </svg>
+    </div>
   );
 }
