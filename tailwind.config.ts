@@ -9,6 +9,23 @@ export default {
   theme: {
     extend: {
       colors: {
+        // ── HelixFlow design tokens ──────────────────────────────────────
+        // Use these instead of raw hex values in components:
+        //   text-hx-mist      bg-hx-void      border-hx-aqua/30
+        //   text-hx-chrome    bg-hx-navy      ring-hx-aqua
+        hx: {
+          void: "#060D1A",   // page background
+          navy: "#0F2145",   // glass card fill base (use with opacity)
+          ocean: "#1466B8",   // secondary accent / helix strand B
+          aqua: "#2DBBEE",   // primary accent / helix strand A / CTA
+          mist: "#F7FBFF",   // headings, primary text
+          chrome: "#B8C5D6",   // secondary text, card labels
+          slate: "#7A8FA8",   // body text, descriptions
+          dim: "#3A4E68",   // tertiary labels, muted hints
+          indigo: "#818cf8",   // delivery phase tag
+          emerald: "#34d399",   // growth / success state
+        },
+        // Legacy helix.* aliases kept for back-compat
         helix: {
           ink: "#0B1B3A",
           ocean: "#1466B8",

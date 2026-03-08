@@ -119,10 +119,16 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    @apply border-border outline-ring/50;
   }
+
+  html {
+    /* Lock the page to the void background; prevents flash on load */
+    background-color: #060D1A;
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
     @apply bg-background text-foreground;
   }
 }
