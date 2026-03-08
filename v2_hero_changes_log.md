@@ -1,0 +1,67 @@
+# HelixFlow v2 — Site Changes Log
+
+A rolling log of implementation changes, integrations, and fixes to the
+HelixFlow marketing site (`helixflow-frontpage`). Ordered newest-first.
+
+---
+
+## [2026-03-08] Waitlist flow integration, Resend wiring, schema fix
+
+### Added
+- `src/lib/validators/waitlist.ts` — shared Zod schema and `WaitlistInput` type,
+  neutral module (no directive) safe for client and server import
+- `src/components/sections/WaitlistForm.tsx` — full waitlist signup form:
+  React Hook Form + Zod resolver, all four UX states (idle / loading / success / error),
+  complete a11y (labels, `aria-invalid`, `aria-describedby`, focus management)
+- `src/app/actions/waitlist.ts` — server action: Zod validation, two concurrent
+  Resend sends (internal notification + user confirmation), `{ data, error }` result
+  checking, graceful no-key fallback
+- `src/components/sections/CTABanner.tsx` — wired to render `WaitlistForm`
+- `.env.local` / `.env.example` — documented test-mode and production env vars
+
+### Fixed
+- **`zodResolver` runtime error** (`Invalid input: not a Zod schema`):
+  `waitlistSchema` was imported from the `"use server"` action file into the client
+  form, making it arrive as an opaque server reference at runtime.
+  Moved schema to `src/lib/validators/waitlist.ts`; updated imports in both consumers.
+  See `NE_error_log.md — [2026-03-08]` for full details.
+- **Resend API-level errors not surfaced**: original `try/catch` only caught network
+  failures. Added explicit `{ data, error }` destructuring from `Promise.all` results
+  so Resend API rejections (bad key, test-mode restrictions) surface as typed errors.
+
+### Infrastructure
+- `src/app/opengraph-image.tsx` — edge ImageResponse (1200×630), Satori bugs fixed
+- `src/app/robots.ts` — `/robots.txt` → 200
+- `src/app/sitemap.ts` — `/sitemap.xml` → 200
+
+### Verified
+- TypeScript: zero errors (`npx tsc --noEmit`)
+- Smoke test: all four scenarios passed (happy path, validation, invalid key, missing key)
+
+---
+
+## [2026-03-07] Homepage assembly + hardening pass
+
+### Added
+- `src/components/primitives/GlassCard.tsx` — polymorphic glass-morphism surface,
+  3 variants (`default`, `strong`, `subtle`)
+- `src/components/primitives/SectionWrapper.tsx` — shared section shell,
+  3 width variants (`wide`, `narrow`, `full`)
+- `src/components/primitives/LogoMark.tsx` — extracted SVG logomark
+- `src/components/primitives/AnimateIn.tsx` — scroll-entrance wrapper
+- `src/components/layout/Navbar.tsx` — site navigation
+- `src/components/layout/SiteFooter.tsx` — site footer
+- `src/lib/motion.ts` — Framer Motion variants; `staggerChild(i)` helper added
+- `tailwind.config.ts` — `hx.*` colour palette (10 tokens); legacy `helix.*` kept
+
+### Changed
+- `src/app/page.tsx` — rewritten as clean 59-line server component composition
+- `src/app/globals.css` — background locked to `#060D1A`, smooth scroll, `color-scheme: dark`
+- `src/components/sections/ArticlePreviews.tsx` — `"use client"` removed
+- `src/components/sections/RoadmapStatus.tsx` — `"use client"` removed
+
+### Sections completed
+Hero, LifecycleRibbon, ModuleGrid, StickyStoryboard, AudienceFit,
+ArticlePreviews, FAQ, RoadmapStatus, CTABanner
+
+---

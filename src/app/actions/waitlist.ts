@@ -27,63 +27,39 @@
  */
 
 import { Resend } from "resend";
-import { z } from "zod";
-
-// ── Schema ────────────────────────────────────────────────────────────────────
-
-export const waitlistSchema = z.object({
-    name: z
-        .string()
-        .min(2, "Name must be at least 2 characters")
-        .max(80, "Name is too long"),
-    email: z
-        .string()
-        .email("Enter a valid email address"),
-    company: z
-        .string()
-        .max(100, "Company name is too long")
-        .optional()
-        .or(z.literal("")),
-    role: z
-        .string()
-        .max(80, "Role is too long")
-        .optional()
-        .or(z.literal("")),
-});
-
-export type WaitlistInput = z.infer<typeof waitlistSchema>;
+import { waitlistSchema, type WaitlistInput } from "@/lib/validators/waitlist";
 
 // ── Action result type ────────────────────────────────────────────────────────
 
 export type WaitlistResult =
-    | { ok: true; message: string }
-    | { ok: false; message: string; fieldErrors?: Record<string, string[]> };
+  | { ok: true; message: string }
+  | { ok: false; message: string; fieldErrors?: Record<string, string[]> };
 
 // ── Email helpers ─────────────────────────────────────────────────────────────
 
 /** Plain-text label for the role value */
 const ROLE_LABELS: Record<string, string> = {
-    "agency-owner": "Agency owner / founder",
-    "account-manager": "Account manager / AM",
-    "operations": "Operations lead",
-    "freelancer": "Freelancer / consultant",
-    "other": "Other",
+  "agency-owner": "Agency owner / founder",
+  "account-manager": "Account manager / AM",
+  "operations": "Operations lead",
+  "freelancer": "Freelancer / consultant",
+  "other": "Other",
 };
 
 function roleLabel(role?: string): string {
-    if (!role) return "—";
-    return ROLE_LABELS[role] ?? role;
+  if (!role) return "—";
+  return ROLE_LABELS[role] ?? role;
 }
 
 /** Internal notification email sent to the team */
 function internalEmailHtml(params: {
-    name: string;
-    email: string;
-    company?: string;
-    role?: string;
+  name: string;
+  email: string;
+  company?: string;
+  role?: string;
 }): string {
-    const { name, email, company, role } = params;
-    return `
+  const { name, email, company, role } = params;
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /></head>
@@ -115,7 +91,7 @@ function internalEmailHtml(params: {
 }
 
 function row(label: string, value: string): string {
-    return `
+  return `
     <tr>
       <td style="padding:8px 0;font-size:13px;font-weight:600;color:#7A8FA8;width:90px;vertical-align:top;">${label}</td>
       <td style="padding:8px 0 8px 16px;font-size:13px;color:#B8C5D6;">${value}</td>
@@ -124,8 +100,8 @@ function row(label: string, value: string): string {
 
 /** Confirmation email sent to the submitter */
 function confirmationEmailHtml(name: string): string {
-    const first = name.split(" ")[0];
-    return `
+  const first = name.split(" ")[0];
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /></head>
@@ -164,77 +140,77 @@ function confirmationEmailHtml(name: string): string {
 // ── Server action ─────────────────────────────────────────────────────────────
 
 export async function submitWaitlist(
-    input: WaitlistInput
+  input: WaitlistInput
 ): Promise<WaitlistResult> {
-    // ── 1. Validate ───────────────────────────────────────────────────────────
-    const parsed = waitlistSchema.safeParse(input);
-    if (!parsed.success) {
-        return {
-            ok: false,
-            message: "Please fix the errors below.",
-            fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
-        };
-    }
-
-    const { name, email, company, role } = parsed.data;
-
-    // ── 2. Graceful dev fallback ──────────────────────────────────────────────
-    if (!process.env.RESEND_API_KEY) {
-        console.warn("[waitlist] RESEND_API_KEY not set — logging submission only.");
-        console.log("[waitlist]", { name, email, company: company || null, role: role || null });
-        return {
-            ok: true,
-            message: "You're on the list. We'll be in touch when your spot opens.",
-        };
-    }
-
-    // ── 3. Send emails via Resend ─────────────────────────────────────────────
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
-    const FROM = process.env.FROM_EMAIL ?? "HelixFlow <noreply@helixflow.cloud>";
-    const NOTIFY = process.env.NOTIFY_EMAIL ?? "hello@helixflow.cloud";
-
-    try {
-        // Fire both emails concurrently — internal notification + user confirmation
-        const [internal, confirmation] = await Promise.all([
-            resend.emails.send({
-                from: FROM,
-                to: NOTIFY,
-                replyTo: email,
-                subject: `New waitlist signup — ${name}`,
-                html: internalEmailHtml({ name, email, company, role }),
-            }),
-            resend.emails.send({
-                from: FROM,
-                to: email,
-                subject: "You're on the HelixFlow list.",
-                html: confirmationEmailHtml(name),
-            }),
-        ]);
-
-        // resend.emails.send() returns { data, error } instead of throwing —
-        // check both results so API-level errors (e.g. invalid key, unverified
-        // recipient in test mode) are surfaced rather than silently swallowed.
-        const apiError = internal.error ?? confirmation.error;
-        if (apiError) {
-            console.error("[waitlist] Resend API error:", apiError);
-            return {
-                ok: false,
-                message:
-                    "Something went wrong sending your request. Please try again or email hello@helixflow.cloud.",
-            };
-        }
-    } catch (err) {
-        console.error("[waitlist] Resend network error:", err);
-        return {
-            ok: false,
-            message:
-                "Something went wrong sending your request. Please try again or email hello@helixflow.cloud.",
-        };
-    }
-
+  // ── 1. Validate ───────────────────────────────────────────────────────────
+  const parsed = waitlistSchema.safeParse(input);
+  if (!parsed.success) {
     return {
-        ok: true,
-        message: "You're on the list. Check your inbox — a confirmation is on its way.",
+      ok: false,
+      message: "Please fix the errors below.",
+      fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
     };
+  }
+
+  const { name, email, company, role } = parsed.data;
+
+  // ── 2. Graceful dev fallback ──────────────────────────────────────────────
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("[waitlist] RESEND_API_KEY not set — logging submission only.");
+    console.log("[waitlist]", { name, email, company: company || null, role: role || null });
+    return {
+      ok: true,
+      message: "You're on the list. We'll be in touch when your spot opens.",
+    };
+  }
+
+  // ── 3. Send emails via Resend ─────────────────────────────────────────────
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const FROM = process.env.FROM_EMAIL ?? "HelixFlow <noreply@helixflow.cloud>";
+  const NOTIFY = process.env.NOTIFY_EMAIL ?? "hello@helixflow.cloud";
+
+  try {
+    // Fire both emails concurrently — internal notification + user confirmation
+    const [internal, confirmation] = await Promise.all([
+      resend.emails.send({
+        from: FROM,
+        to: NOTIFY,
+        replyTo: email,
+        subject: `New waitlist signup — ${name}`,
+        html: internalEmailHtml({ name, email, company, role }),
+      }),
+      resend.emails.send({
+        from: FROM,
+        to: email,
+        subject: "You're on the HelixFlow list.",
+        html: confirmationEmailHtml(name),
+      }),
+    ]);
+
+    // resend.emails.send() returns { data, error } instead of throwing —
+    // check both results so API-level errors (e.g. invalid key, unverified
+    // recipient in test mode) are surfaced rather than silently swallowed.
+    const apiError = internal.error ?? confirmation.error;
+    if (apiError) {
+      console.error("[waitlist] Resend API error:", apiError);
+      return {
+        ok: false,
+        message:
+          "Something went wrong sending your request. Please try again or email hello@helixflow.cloud.",
+      };
+    }
+  } catch (err) {
+    console.error("[waitlist] Resend network error:", err);
+    return {
+      ok: false,
+      message:
+        "Something went wrong sending your request. Please try again or email hello@helixflow.cloud.",
+    };
+  }
+
+  return {
+    ok: true,
+    message: "You're on the list. Check your inbox — a confirmation is on its way.",
+  };
 }

@@ -29,10 +29,9 @@ import { useRef, useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
+import { waitlistSchema, type WaitlistInput } from "@/lib/validators/waitlist";
 import {
     submitWaitlist,
-    waitlistSchema,
-    type WaitlistInput,
     type WaitlistResult,
 } from "@/app/actions/waitlist";
 import { useState } from "react";
