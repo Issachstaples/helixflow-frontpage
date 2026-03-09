@@ -26,7 +26,7 @@ without re-reading the full history.
 | Animation | Framer Motion — variants in `src/lib/motion.ts` |
 | UI components | shadcn/ui (`src/components/ui/`) |
 | Form validation | React Hook Form 7 + Zod 4 + `@hookform/resolvers` |
-| Email | Resend SDK v6 (`src/app/actions/waitlist.ts`) |
+| Automation | n8n (self-hosted at `n8n.helixflow.cloud`) |
 | Fonts | Geist Sans + Geist Mono via `next/font/google` |
 
 ---
@@ -70,31 +70,35 @@ Defined in `tailwind.config.ts`. Key tokens:
 ### Server action — `src/app/actions/waitlist.ts`
 - `"use server"` directive
 - Imports `waitlistSchema` and `WaitlistInput` from `src/lib/validators/waitlist`
-- Validates with `safeParse`, then sends two emails concurrently via Resend:
-  1. Internal notification → `NOTIFY_EMAIL`
-  2. User confirmation → the submitted email address
-- Checks `{ data, error }` return from each `resend.emails.send()` call (does not rely solely on `try/catch`)
-- Graceful fallback: if `RESEND_API_KEY` is absent, logs to console and returns `ok: true`
+- Validates with Zod `safeParse`
+- POSTs JSON payload to `N8N_WAITLIST_WEBHOOK_URL`
+- Payload shape: `{ name, email, company, role, submittedAt, source: "helixflow-marketing-site" }`
+- Checks HTTP status + parses response body — requires `{ ok: true }` from n8n
+- Missing webhook URL → typed error (no silent fallback)
+- Network failure / non-OK status / bad body → typed error
 
 ### Client form — `src/components/sections/WaitlistForm.tsx`
 - `"use client"` directive
 - React Hook Form + `zodResolver(waitlistSchema)` — schema imported from shared validator
-- `useTransition` wraps the server action call
+- `useTransition` wraps the server action call; `try/catch` handles unexpected throws
 - States: idle → loading (spinner) → success (green-check, focus-managed) / error (banner + field errors)
 - Full a11y: visible labels, `aria-invalid`, `aria-describedby`, `role="alert"`
 
 ### Shared schema — `src/lib/validators/waitlist.ts`
-- No directive — safe on both sides of the boundary
+- No directive — safe on both sides of the client/server boundary
 - Exports `waitlistSchema` (Zod object) and `WaitlistInput` (inferred type)
 
 ### Environment variables
 ```bash
-RESEND_API_KEY=re_...                          # Resend API key
-FROM_EMAIL=HelixFlow <onboarding@resend.dev>  # test-mode sender
-NOTIFY_EMAIL=newportecom@gmail.com            # internal notification recipient
+N8N_WAITLIST_WEBHOOK_URL=https://n8n.helixflow.cloud/webhook/<id>
 ```
-Test-mode constraint: `onboarding@resend.dev` only delivers to the Resend account email.
-Production path: verify `helixflow.cloud` in Resend → switch `FROM_EMAIL` to `noreply@helixflow.cloud`.
+Required in both development and production. If missing, form returns a typed error.
+
+### n8n workflow
+- Trigger: Webhook node (POST)
+- Stores signup in the HelixFlow Waitlist data table
+- Responds with `{ "ok": true }` — required by the server action
+- Hosted at `n8n.helixflow.cloud`
 
 ---
 
@@ -107,6 +111,28 @@ Production path: verify `helixflow.cloud` in Resend → switch `FROM_EMAIL` to `
 ---
 
 ## Session notes
+
+### 2026-03-08 — n8n webhook migration + production wiring
+
+**Completed this session:**
+
+1. **Migrated waitlist flow from Resend to n8n webhook** — `waitlist.ts` rewritten to
+   POST to `N8N_WAITLIST_WEBHOOK_URL`. All Resend SDK code and env vars removed.
+
+2. **n8n workflow verified end-to-end locally** — webhook stores signup in HelixFlow
+   Waitlist data table and returns `{ "ok": true }`. Form shows success state correctly.
+
+3. **Production wiring** — debug logs removed, dead `CTAAction` interface and
+   `CTA_ACTIONS` / `PrimaryButton` / `SecondaryButton` dead code purged from
+   `CTABanner.tsx`. Server action is now production-ready.
+
+4. **Env var simplified** — only `N8N_WAITLIST_WEBHOOK_URL` required. `.env.example`
+   and `context_anchor.md` updated to reflect current architecture.
+
+**Current state:** TypeScript clean, no dead code, no dev-only assumptions.
+Ready for live deployment — add `N8N_WAITLIST_WEBHOOK_URL` to Coolify env vars and redeploy.
+
+---
 
 ### 2026-03-08 — Waitlist integration + Resend smoke test + schema fix
 
@@ -138,9 +164,8 @@ end-to-end verified in test mode.
 
 ## Next steps
 
-- [ ] Verify production / VPS env vars
-- [ ] Run one live-domain waitlist submission
-- [ ] Confirm both live emails arrive
+- [ ] Add `N8N_WAITLIST_WEBHOOK_URL` to Coolify env vars and redeploy
+- [ ] Run one live-domain waitlist submission to confirm end-to-end on production
 - [ ] Migrate next-touched sections to `GlassCard` and `SectionWrapper`
 - [ ] Replace remaining inline hex with `hx-*` tokens
 - [ ] Replace manual stagger delays with `staggerChild(i)`

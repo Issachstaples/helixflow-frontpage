@@ -44,20 +44,6 @@ import WaitlistForm from "@/components/sections/WaitlistForm";
 import { fadeUp, fadeUpSlow } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-// ── Types ─────────────────────────────────────────────────────────────────────
-
-interface CTAAction {
-    id: string;
-    label: string;
-    href: string;
-    /** "primary" renders as the filled aqua button; "secondary" as ghost */
-    variant: "primary" | "secondary";
-    /** Accessible label for screen readers when label alone isn't descriptive */
-    ariaLabel?: string;
-    /** Opens in new tab */
-    external?: boolean;
-}
-
 // ── Content ───────────────────────────────────────────────────────────────────
 
 const COPY = {
@@ -68,24 +54,7 @@ const COPY = {
     trustLine: "No payment required. No spam. Unsubscribe anytime.",
 } as const;
 
-const CTA_ACTIONS: CTAAction[] = [
-    {
-        id: "early-access",
-        label: "Request early access",
-        href: "mailto:hello@helixflow.cloud?subject=Early Access Request",
-        variant: "primary",
-        ariaLabel: "Request early access to HelixFlow",
-    },
-    {
-        id: "updates",
-        label: "Get product updates",
-        href: "mailto:hello@helixflow.cloud?subject=Product Updates",
-        variant: "secondary",
-        ariaLabel: "Sign up for HelixFlow product updates",
-    },
-];
-
-// ── Sub-components ─────────────────────────────────────────────────────────────
+// ── Sub-components ────────────────────────────────────────────────────────────
 
 /** The grid dot overlay — reinforces command-layer aesthetic */
 function GridOverlay() {
@@ -114,73 +83,7 @@ function GridOverlay() {
     );
 }
 
-/** Primary CTA button — aqua fill with inner shine */
-function PrimaryButton({ action }: { action: CTAAction }) {
-    return (
-        <a
-            href={action.href}
-            aria-label={action.ariaLabel ?? action.label}
-            {...(action.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className={cn(
-                "group relative inline-flex items-center justify-center gap-2 overflow-hidden",
-                "rounded-full px-7 py-3",
-                "text-sm font-semibold text-[#060D1A]",
-                "bg-[#2DBBEE]",
-                // Inner top shine
-                "shadow-[0_1px_0_0_rgba(255,255,255,0.35)_inset,0_8px_32px_rgba(45,187,238,0.30)]",
-                "transition-all duration-200",
-                "hover:bg-[#3EC8F5] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.40)_inset,0_12px_40px_rgba(45,187,238,0.45)]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060D1A]",
-                "active:scale-[0.98]"
-            )}
-        >
-            {/* Sweep shimmer on hover */}
-            <span
-                className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full"
-                aria-hidden="true"
-            />
-            <span className="relative">{action.label}</span>
-            <svg
-                className="relative h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-            >
-                <path
-                    d="M3 8h10M9 4l4 4-4 4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            </svg>
-        </a>
-    );
-}
-
-/** Secondary CTA button — ghost glass treatment */
-function SecondaryButton({ action }: { action: CTAAction }) {
-    return (
-        <a
-            href={action.href}
-            aria-label={action.ariaLabel ?? action.label}
-            {...(action.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className={cn(
-                "group inline-flex items-center justify-center gap-2",
-                "rounded-full border border-white/[0.14] bg-white/[0.05] px-7 py-3",
-                "text-sm font-medium text-[#B8C5D6] backdrop-blur-sm",
-                "transition-all duration-200",
-                "hover:border-white/[0.24] hover:bg-white/[0.09] hover:text-[#F7FBFF]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060D1A]",
-                "active:scale-[0.98]"
-            )}
-        >
-            {action.label}
-        </a>
-    );
-}
-
-// ── Section export ─────────────────────────────────────────────────────────────
+// ── Section export ────────────────────────────────────────────────────────────
 
 export default function CTABanner() {
     return (
