@@ -257,7 +257,7 @@ function NodeRail({
                                 className={cn(
                                     "transition-all",
                                     reduced ? "" : "duration-300",
-                                    isActive ? "text-[#060D1A]" : isPast ? "text-[#7A8FA8]" : "text-[#3A4E68]"
+                                    isActive ? "text-[#060D1A]" : isPast ? "text-hx-slate" : "text-hx-dim"
                                 )}
                             >
                                 {isActive || isPast ? (
@@ -304,11 +304,11 @@ function ActivityFeed({
                             style={{ backgroundColor: accent.from, opacity: i === 0 ? 1 : 0.4 }}
                             aria-hidden="true"
                         />
-                        <span className={cn("text-[11px] leading-tight", i === 0 ? "text-[#B8C5D6]" : "text-[#7A8FA8]")}>
+                        <span className={cn("text-[11px] leading-tight", i === 0 ? "text-hx-chrome" : "text-hx-slate")}>
                             {event.label}
                         </span>
                     </div>
-                    <span className="flex-shrink-0 text-[10px] text-[#3A4E68]">{event.time}</span>
+                    <span className="flex-shrink-0 text-[10px] text-hx-dim">{event.time}</span>
                 </motion.div>
             ))}
         </div>
@@ -365,7 +365,7 @@ function VisualPanel({
                             style={{ backgroundColor: activeStep.accent.from, opacity: 0.8 }}
                             aria-hidden="true"
                         />
-                        <span className="text-[10px] font-medium text-[#7A8FA8]">helixflow.cloud</span>
+                        <span className="text-[10px] font-medium text-hx-slate">helixflow.cloud</span>
                     </div>
                 </div>
 
@@ -409,7 +409,7 @@ function VisualPanel({
 
                         {/* System note */}
                         <div className="mb-4 rounded-lg border border-white/[0.06] bg-[rgba(6,13,26,0.50)] px-3 py-2">
-                            <p className="text-[11px] italic text-[#7A8FA8]">
+                            <p className="text-[11px] italic text-hx-slate">
                                 <span
                                     className="not-italic font-medium"
                                     style={{ color: activeStep.accent.from, opacity: 0.8 }}
@@ -422,7 +422,7 @@ function VisualPanel({
 
                         {/* Activity feed */}
                         <div>
-                            <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-[#3A4E68]">
+                            <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-hx-dim">
                                 Activity
                             </p>
                             <ActivityFeed
@@ -474,7 +474,7 @@ function NarrativeStep({
             <h3
                 className={cn(
                     "text-xl font-semibold leading-snug tracking-tight transition-colors duration-300 sm:text-2xl",
-                    isActive ? "text-[#F7FBFF]" : "text-[#7A8FA8]"
+                    isActive ? "text-[#F7FBFF]" : "text-hx-slate"
                 )}
             >
                 {step.headline}
@@ -484,7 +484,7 @@ function NarrativeStep({
             <p
                 className={cn(
                     "mt-3 max-w-[44ch] text-sm leading-relaxed transition-colors duration-300 sm:text-base",
-                    isActive ? "text-[#7A8FA8]" : "text-[#3A4E68]"
+                    isActive ? "text-hx-slate" : "text-hx-dim"
                 )}
             >
                 {step.body}
@@ -552,10 +552,10 @@ function MobileStoryboard({ steps }: { steps: StoryStep[] }) {
                     <h3 className="text-base font-semibold leading-snug text-[#F7FBFF]">
                         {step.headline}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#7A8FA8]">{step.body}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-hx-slate">{step.body}</p>
 
                     {/* System note */}
-                    <p className="mt-3 text-[11px] italic text-[#3A4E68]">
+                    <p className="mt-3 text-[11px] italic text-hx-dim">
                         <span className="not-italic font-medium" style={{ color: step.accent.from, opacity: 0.6 }}>
                             System:{" "}
                         </span>
@@ -659,7 +659,7 @@ export default function StickyStoryboard() {
                                 />
                             ))}
                         </div>
-                        <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                        <span className="text-xs font-medium tracking-wide text-hx-chrome">
                             {SECTION_COPY.eyebrow}
                         </span>
                     </div>
@@ -667,7 +667,7 @@ export default function StickyStoryboard() {
                     <h2 className="text-balance text-3xl font-semibold tracking-tight text-[#F7FBFF] sm:text-4xl">
                         {SECTION_COPY.headline}
                     </h2>
-                    <p className="mt-4 text-pretty text-base leading-relaxed text-[#7A8FA8] sm:text-lg">
+                    <p className="mt-4 text-pretty text-base leading-relaxed text-hx-slate sm:text-lg">
                         {SECTION_COPY.sub}
                     </p>
                 </div>
@@ -731,7 +731,7 @@ export default function StickyStoryboard() {
                                         />
                                     ))}
                                 </div>
-                                <span className="text-[11px] text-[#3A4E68]">
+                                <span className="text-[11px] text-hx-dim">
                                     {activeIndex + 1} / {STEPS.length}
                                 </span>
                             </div>

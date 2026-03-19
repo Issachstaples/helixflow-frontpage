@@ -163,7 +163,7 @@ export default function CTABanner() {
                                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DBBEE] opacity-60 motion-reduce:animate-none" />
                                             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DBBEE]" />
                                         </span>
-                                        <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                                        <span className="text-xs font-medium tracking-wide text-hx-chrome">
                                             {COPY.eyebrow}
                                         </span>
                                     </div>
@@ -187,7 +187,7 @@ export default function CTABanner() {
 
                             {/* Sub copy */}
                             <AnimateIn variants={fadeUp} delay={0.22} threshold={0.1}>
-                                <p className="mx-auto mt-5 max-w-[44ch] text-pretty text-base leading-relaxed text-[#7A8FA8] sm:text-lg">
+                                <p className="mx-auto mt-5 max-w-[44ch] text-pretty text-base leading-relaxed text-hx-slate sm:text-lg">
                                     {COPY.sub}
                                 </p>
                             </AnimateIn>

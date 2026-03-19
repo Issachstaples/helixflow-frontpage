@@ -197,11 +197,11 @@ function FAQAccordionItem({ item, index }: { item: FAQItem; index: number }) {
                     className={cn(
                         // Override shadcn defaults
                         "px-5 py-4 text-left no-underline hover:no-underline",
-                        "text-[15px] font-medium leading-snug text-[#B8C5D6]",
+                        "text-[15px] font-medium leading-snug text-hx-chrome",
                         "transition-colors duration-200",
                         "data-[state=open]:text-[#F7FBFF]",
                         // Chevron color override
-                        "[&>svg]:text-[#3A4E68] [&[data-state=open]>svg]:text-[#2DBBEE]",
+                        "[&>svg]:text-hx-dim [&[data-state=open]>svg]:text-[#2DBBEE]",
                         // Kill the underline hover from shadcn base
                         "hover:text-[#F7FBFF]",
                         // Focus ring tuned to design system
@@ -221,13 +221,13 @@ function FAQAccordionItem({ item, index }: { item: FAQItem; index: number }) {
                     className={cn(
                         "px-5 pb-5 pt-0",
                         // Override shadcn text-sm default
-                        "text-[13px] leading-relaxed text-[#7A8FA8] sm:text-sm"
+                        "text-[13px] leading-relaxed text-hx-slate sm:text-sm"
                     )}
                 >
                     {item.answerParagraphs ? (
                         <div className="space-y-3">
                             {item.answerParagraphs.map((para, i) => (
-                                <p key={i} className={i === 0 ? "text-[#B8C5D6]" : "text-[#7A8FA8]"}>
+                                <p key={i} className={i === 0 ? "text-hx-chrome" : "text-hx-slate"}>
                                     {para}
                                 </p>
                             ))}
@@ -281,7 +281,7 @@ export default function FAQ() {
                         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-sm">
                             {/* Question-mark icon */}
                             <svg
-                                className="h-3 w-3 text-[#7A8FA8]"
+                                className="h-3 w-3 text-hx-slate"
                                 viewBox="0 0 12 12"
                                 fill="none"
                                 aria-hidden="true"
@@ -294,7 +294,7 @@ export default function FAQ() {
                                     strokeLinejoin="round"
                                 />
                             </svg>
-                            <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                            <span className="text-xs font-medium tracking-wide text-hx-chrome">
                                 {SECTION_COPY.eyebrow}
                             </span>
                         </div>
@@ -310,7 +310,7 @@ export default function FAQ() {
                     </AnimateIn>
 
                     <AnimateIn variants={fadeUp} delay={0.15} threshold={0.2}>
-                        <p className="mt-3 text-base leading-relaxed text-[#7A8FA8]">
+                        <p className="mt-3 text-base leading-relaxed text-hx-slate">
                             {SECTION_COPY.sub}
                         </p>
                     </AnimateIn>
@@ -335,13 +335,13 @@ export default function FAQ() {
                 {/* ── Still have questions nudge ────────────────────────────── */}
                 <AnimateIn variants={fadeUp} delay={0.1} threshold={0.1}>
                     <div className="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center sm:gap-4">
-                        <p className="text-sm text-[#7A8FA8]">Still have questions?</p>
+                        <p className="text-sm text-hx-slate">Still have questions?</p>
                         <a
                             href="mailto:hello@helixflow.cloud"
                             className={cn(
                                 "inline-flex items-center gap-1.5 rounded-full",
                                 "border border-white/10 bg-white/[0.04] px-4 py-1.5",
-                                "text-sm font-medium text-[#B8C5D6] backdrop-blur-sm",
+                                "text-sm font-medium text-hx-chrome backdrop-blur-sm",
                                 "transition-all duration-200",
                                 "hover:border-white/20 hover:bg-white/[0.07] hover:text-[#F7FBFF]",
                                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/50"

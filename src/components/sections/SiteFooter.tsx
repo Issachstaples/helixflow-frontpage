@@ -56,7 +56,7 @@ export default function SiteFooter() {
                             </span>
                         </a>
 
-                        <p className="text-sm text-[#7A8FA8] leading-relaxed max-w-[260px]">
+                        <p className="text-sm text-hx-slate leading-relaxed max-w-[260px]">
                             AI-assisted CRM for agencies. Leads to delivery — then
                             growth on autopilot.
                         </p>
@@ -65,7 +65,7 @@ export default function SiteFooter() {
                             href="https://newportecom.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs text-[#3A4E68] hover:text-[#7A8FA8] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded w-fit"
+                            className="text-xs text-hx-dim hover:text-hx-slate transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded w-fit"
                         >
                             A product of Newport E-commerce →
                         </a>
@@ -73,7 +73,7 @@ export default function SiteFooter() {
 
                     {/* ── Center: page navigation ─────────────────────── */}
                     <nav aria-label="Footer navigation">
-                        <p className="text-[11px] uppercase tracking-widest text-[#3A4E68] font-semibold mb-4">
+                        <p className="text-[11px] uppercase tracking-widest text-hx-dim font-semibold mb-4">
                             Navigation
                         </p>
                         <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
@@ -81,7 +81,7 @@ export default function SiteFooter() {
                                 <li key={link.href}>
                                     <a
                                         href={link.href}
-                                        className="text-sm text-[#7A8FA8] hover:text-[#F7FBFF] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded"
+                                        className="text-sm text-hx-slate hover:text-[#F7FBFF] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded"
                                     >
                                         {link.label}
                                     </a>
@@ -92,7 +92,7 @@ export default function SiteFooter() {
 
                     {/* ── Right: external links ───────────────────────── */}
                     <div className="md:text-right">
-                        <p className="text-[11px] uppercase tracking-widest text-[#3A4E68] font-semibold mb-4">
+                        <p className="text-[11px] uppercase tracking-widest text-hx-dim font-semibold mb-4">
                             Links
                         </p>
                         <ul className="flex flex-col gap-2.5 list-none p-0 m-0 md:items-end">
@@ -102,7 +102,7 @@ export default function SiteFooter() {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-sm text-[#7A8FA8] hover:text-[#2DBBEE] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded"
+                                        className="text-sm text-hx-slate hover:text-[#2DBBEE] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded"
                                     >
                                         {link.label}
                                     </a>
@@ -114,10 +114,10 @@ export default function SiteFooter() {
 
                 {/* Bottom rule + copyright */}
                 <div className="mt-10 border-t border-white/[0.06] pt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-xs text-[#3A4E68]">
+                    <p className="text-xs text-hx-dim">
                         © {new Date().getFullYear()} HelixFlow · A product of Newport E-commerce
                     </p>
-                    <p className="text-xs text-[#3A4E68]">
+                    <p className="text-xs text-hx-dim">
                         All rights reserved.
                     </p>
                 </div>

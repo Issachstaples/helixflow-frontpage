@@ -82,7 +82,7 @@ const STATUS_COLORS: Record<ModuleStatus, { dot: string; text: string; border: s
 const PipelineMockUI = (
     <div className="select-none space-y-2" aria-hidden="true">
         {/* Column header row */}
-        <div className="flex gap-2 text-[9px] font-semibold uppercase tracking-widest text-[#3A4E68]">
+        <div className="flex gap-2 text-[9px] font-semibold uppercase tracking-widest text-hx-dim">
             <span className="w-[72px]">Leads</span>
             <span className="w-[72px]">Qualified</span>
             <span className="w-[72px]">Proposal</span>
@@ -97,7 +97,7 @@ const PipelineMockUI = (
                         className="rounded-md border border-white/[0.07] bg-[rgba(15,33,69,0.80)] px-2 py-1.5"
                     >
                         <div className="mb-0.5 h-1.5 w-8 rounded-full bg-[#2DBBEE]/40" />
-                        <p className="text-[9px] font-medium text-[#B8C5D6]">{name}</p>
+                        <p className="text-[9px] font-medium text-hx-chrome">{name}</p>
                     </div>
                 ))}
             </div>
@@ -109,7 +109,7 @@ const PipelineMockUI = (
                         className="rounded-md border border-white/[0.07] bg-[rgba(15,33,69,0.80)] px-2 py-1.5"
                     >
                         <div className="mb-0.5 h-1.5 w-6 rounded-full bg-[#6366f1]/40" />
-                        <p className="text-[9px] font-medium text-[#B8C5D6]">{name}</p>
+                        <p className="text-[9px] font-medium text-hx-chrome">{name}</p>
                     </div>
                 ))}
             </div>
@@ -129,7 +129,7 @@ const PipelineMockUI = (
         {/* Score row */}
         <div className="flex items-center gap-1.5 border-t border-white/[0.05] pt-2">
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span className="text-[9px] text-[#7A8FA8]">3 follow-ups due today</span>
+            <span className="text-[9px] text-hx-slate">3 follow-ups due today</span>
         </div>
     </div>
 );
@@ -144,7 +144,7 @@ const ProposalMockUI = (
                     <div className="h-4 w-4 rounded-md border border-[#6366f1]/30 bg-[#6366f1]/10 grid place-items-center">
                         <div className="h-1.5 w-1.5 rounded-full bg-[#6366f1]/70" />
                     </div>
-                    <span className="text-[9px] font-semibold text-[#B8C5D6]">Proposal_AcmeCo.pdf</span>
+                    <span className="text-[9px] font-semibold text-hx-chrome">Proposal_AcmeCo.pdf</span>
                 </div>
                 <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-1.5 text-[8px] font-medium text-emerald-400">
                     Signed
@@ -159,7 +159,7 @@ const ProposalMockUI = (
         </div>
         {/* Onboarding checklist */}
         <div className="space-y-1">
-            <p className="text-[8px] font-semibold uppercase tracking-widest text-[#3A4E68]">Onboarding checklist</p>
+            <p className="text-[8px] font-semibold uppercase tracking-widest text-hx-dim">Onboarding checklist</p>
             {[
                 { label: "Intake form sent", done: true },
                 { label: "Access granted", done: true },
@@ -178,7 +178,7 @@ const ProposalMockUI = (
                             </svg>
                         )}
                     </div>
-                    <span className={cn("text-[9px]", item.done ? "text-[#7A8FA8]" : "text-[#B8C5D6]")}>
+                    <span className={cn("text-[9px]", item.done ? "text-hx-slate" : "text-hx-chrome")}>
                         {item.label}
                     </span>
                 </div>
@@ -195,7 +195,7 @@ const AIAssistMockUI = (
             <div className="h-3.5 w-3.5 rounded-full border border-[#2DBBEE]/30 bg-[#2DBBEE]/10 grid place-items-center flex-shrink-0">
                 <div className="h-1 w-1 rounded-full bg-[#2DBBEE]" />
             </div>
-            <span className="rounded-full border border-white/[0.07] bg-white/[0.04] px-2 py-0.5 text-[9px] text-[#7A8FA8]">
+            <span className="rounded-full border border-white/[0.07] bg-white/[0.04] px-2 py-0.5 text-[9px] text-hx-slate">
                 Summarize last 3 client meetings
             </span>
         </div>
@@ -217,7 +217,7 @@ const AIAssistMockUI = (
             {["Draft follow-up", "Create task", "Send update"].map((action) => (
                 <span
                     key={action}
-                    className="rounded-full border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[9px] text-[#7A8FA8]"
+                    className="rounded-full border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[9px] text-hx-slate"
                 >
                     {action}
                 </span>
@@ -377,7 +377,7 @@ function PhasePip({ phase }: { phase: Module["phase"] }) {
                 style={{ background: `linear-gradient(90deg, ${color}, transparent)` }}
                 aria-hidden="true"
             />
-            <span className="text-[10px] text-[#3A4E68]" aria-hidden="true">{label}</span>
+            <span className="text-[10px] text-hx-dim" aria-hidden="true">{label}</span>
         </div>
     );
 }
@@ -385,7 +385,7 @@ function PhasePip({ phase }: { phase: Module["phase"] }) {
 /** Feature tag pills */
 function FeaturePill({ label, accent }: { label: string; accent: Module["accent"] }) {
     return (
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-[#B8C5D6]">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-[11px] font-medium text-hx-chrome">
             <span
                 className="h-1 w-1 flex-shrink-0 rounded-full"
                 style={{ backgroundColor: accent.from, opacity: 0.7 }}
@@ -520,7 +520,7 @@ function PrimaryModuleCard({
                     </div>
 
                     {/* Description */}
-                    <p className="max-w-prose text-sm leading-relaxed text-[#7A8FA8] sm:text-base">
+                    <p className="max-w-prose text-sm leading-relaxed text-hx-slate sm:text-base">
                         {module.description}
                     </p>
 
@@ -616,7 +616,7 @@ function SupportingModuleCard({
             </div>
 
             {/* Description */}
-            <p className="text-sm leading-relaxed text-[#7A8FA8]">{module.description}</p>
+            <p className="text-sm leading-relaxed text-hx-slate">{module.description}</p>
 
             {/* Mock UI */}
             <MockUIPanel accent={module.accent} reduced={reduced} isPrimary={false}>
@@ -694,7 +694,7 @@ export default function ModuleGrid() {
                             <div className="h-1.5 w-1.5 rounded-full bg-[#818cf8]/70" />
                             <div className="h-1.5 w-1.5 rounded-full bg-[#2DBBEE]/50" />
                         </div>
-                        <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                        <span className="text-xs font-medium tracking-wide text-hx-chrome">
                             {SECTION_COPY.eyebrow}
                         </span>
                     </motion.div>
@@ -718,7 +718,7 @@ export default function ModuleGrid() {
                     </motion.h2>
 
                     <motion.p
-                        className="mt-4 text-pretty text-base leading-relaxed text-[#7A8FA8] sm:text-lg"
+                        className="mt-4 text-pretty text-base leading-relaxed text-hx-slate sm:text-lg"
                         initial={reduced ? false : { opacity: 0, y: 14 }}
                         animate={
                             isInView
@@ -779,16 +779,16 @@ export default function ModuleGrid() {
                                 : { opacity: 0, y: 12 }
                     }
                 >
-                    <p className="text-center text-sm text-[#7A8FA8] sm:text-left">
+                    <p className="text-center text-sm text-hx-slate sm:text-left">
                         All three modules share one context layer.{" "}
-                        <span className="text-[#B8C5D6]">What you capture in Pipeline flows into Proposals. AI Assist reads all of it.</span>
+                        <span className="text-hx-chrome">What you capture in Pipeline flows into Proposals. AI Assist reads all of it.</span>
                     </p>
                     <a
                         href="#storyboard"
                         className={cn(
                             "inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg px-4 py-2",
                             "border border-white/10 bg-white/[0.04] backdrop-blur-sm",
-                            "text-sm font-medium text-[#B8C5D6] transition-all duration-150",
+                            "text-sm font-medium text-hx-chrome transition-all duration-150",
                             "hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F7FBFF]",
                             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/50",
                             "motion-reduce:transition-none"

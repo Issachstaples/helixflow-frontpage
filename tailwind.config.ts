@@ -20,7 +20,7 @@ export default {
           aqua: "#2DBBEE",   // primary accent / helix strand A / CTA
           mist: "#F7FBFF",   // headings, primary text
           chrome: "#B8C5D6",   // secondary text, card labels
-          slate: "#7A8FA8",   // body text, descriptions
+          slate: "#B7C6D8",   // body text, descriptions (lightened for improved contrast)
           dim: "#3A4E68",   // tertiary labels, muted hints
           indigo: "#818cf8",   // delivery phase tag
           emerald: "#34d399",   // growth / success state

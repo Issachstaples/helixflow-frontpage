@@ -66,7 +66,7 @@ function Field({
         <div className="flex flex-col gap-1.5">
             <label
                 htmlFor={id}
-                className="text-sm font-medium text-[#B8C5D6]"
+                className="text-sm font-medium text-hx-chrome"
             >
                 {label}
                 {required && (
@@ -92,7 +92,7 @@ function Field({
 const inputBase = cn(
     "w-full rounded-xl px-4 py-3 text-sm",
     "bg-[rgba(15,33,69,0.60)] backdrop-blur-sm",
-    "border border-white/[0.10] text-[#F7FBFF] placeholder:text-[#3A4E68]",
+    "border border-white/[0.10] text-[#F7FBFF] placeholder:text-hx-dim",
     "transition-colors duration-150",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/70 focus-visible:border-[#2DBBEE]/40",
     "disabled:cursor-not-allowed disabled:opacity-50"
@@ -140,7 +140,7 @@ function SuccessMessage({ message }: { message: string }) {
 
             <div>
                 <p className="text-lg font-semibold text-[#F7FBFF]">You&apos;re on the list.</p>
-                <p className="mt-1 text-sm text-[#7A8FA8]">{message}</p>
+                <p className="mt-1 text-sm text-hx-slate">{message}</p>
             </div>
         </div>
     );
@@ -163,8 +163,17 @@ export default function WaitlistForm() {
 
     const onSubmit = (data: WaitlistInput) => {
         startTransition(async () => {
-            const res = await submitWaitlist(data);
-            setResult(res);
+            try {
+                const res = await submitWaitlist(data);
+                setResult(res);
+            } catch (err) {
+                console.error("[WaitlistForm] Server action threw unexpectedly:", err);
+                setResult({
+                    ok: false,
+                    message:
+                        "Something went wrong submitting your request. Please try again or email hello@helixflow.cloud.",
+                });
+            }
         });
     };
 
@@ -326,7 +335,7 @@ export default function WaitlistForm() {
                 )}
             </button>
 
-            <p className="text-center text-[11px] text-[#3A4E68]">
+            <p className="text-center text-[11px] text-hx-dim">
                 No payment required. No spam. Unsubscribe anytime.
             </p>
         </form>

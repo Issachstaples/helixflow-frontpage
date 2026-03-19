@@ -372,16 +372,16 @@ function RoadmapRow({
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                             <StatusPill status={item.status} />
                             {item.phase && (
-                                <span className="text-[10px] font-medium uppercase tracking-widest text-[#3A4E68]">
+                                <span className="text-[10px] font-medium uppercase tracking-widest text-hx-dim">
                                     {item.phase}
                                 </span>
                             )}
                             {item.timeframe && (
                                 <>
-                                    <span className="text-[10px] text-[#3A4E68]" aria-hidden="true">
+                                    <span className="text-[10px] text-hx-dim" aria-hidden="true">
                                         ·
                                     </span>
-                                    <span className="text-[10px] text-[#3A4E68]">{item.timeframe}</span>
+                                    <span className="text-[10px] text-hx-dim">{item.timeframe}</span>
                                 </>
                             )}
                         </div>
@@ -392,7 +392,7 @@ function RoadmapRow({
                         </h3>
 
                         {/* Description */}
-                        <p className="mt-1 text-[13px] leading-relaxed text-[#7A8FA8]">
+                        <p className="mt-1 text-[13px] leading-relaxed text-hx-slate">
                             {item.description}
                         </p>
                     </div>
@@ -419,14 +419,14 @@ function SystemStatusBar() {
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34d399] opacity-50 motion-reduce:animate-none" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-[#34d399]" />
                     </span>
-                    <span className="text-[13px] font-medium text-[#B8C5D6]">
+                    <span className="text-[13px] font-medium text-hx-chrome">
                         {SYSTEM_STATUS.label}
                     </span>
                 </div>
 
                 {/* Right: uptime + last checked */}
                 <div className="flex items-center gap-3">
-                    <span className="hidden text-[11px] text-[#3A4E68] sm:block">
+                    <span className="hidden text-[11px] text-hx-dim sm:block">
                         {SYSTEM_STATUS.uptimeLabel}
                     </span>
                     <span
@@ -494,7 +494,7 @@ function PhaseSummary() {
                                         <span
                                             className={cn(
                                                 "text-[12px] leading-snug",
-                                                phase.id === "next" ? "text-[#3A4E68]" : "text-[#7A8FA8]"
+                                                phase.id === "next" ? "text-hx-dim" : "text-hx-slate"
                                             )}
                                         >
                                             {title}
@@ -533,7 +533,7 @@ export default function RoadmapStatus() {
                         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-sm">
                             {/* Signal / broadcast icon */}
                             <svg
-                                className="h-3 w-3 text-[#7A8FA8]"
+                                className="h-3 w-3 text-hx-slate"
                                 viewBox="0 0 12 12"
                                 fill="none"
                                 aria-hidden="true"
@@ -546,7 +546,7 @@ export default function RoadmapStatus() {
                                     strokeLinejoin="round"
                                 />
                             </svg>
-                            <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                            <span className="text-xs font-medium tracking-wide text-hx-chrome">
                                 {SECTION_COPY.eyebrow}
                             </span>
                         </div>
@@ -562,7 +562,7 @@ export default function RoadmapStatus() {
                     </AnimateIn>
 
                     <AnimateIn variants={fadeUp} delay={0.15} threshold={0.2}>
-                        <p className="mt-3 text-base leading-relaxed text-[#7A8FA8]">
+                        <p className="mt-3 text-base leading-relaxed text-hx-slate">
                             {SECTION_COPY.sub}
                         </p>
                     </AnimateIn>

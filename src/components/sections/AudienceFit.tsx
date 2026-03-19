@@ -231,16 +231,16 @@ function AudienceCard({ archetype }: { archetype: AudienceArchetype }) {
 
             {/* Pain */}
             <div className="mb-4 rounded-xl border border-white/[0.05] bg-[rgba(6,13,26,0.45)] px-4 py-3">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3A4E68]">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-hx-dim">
                     The problem today
                 </p>
-                <p className="mt-1.5 text-[13px] leading-relaxed text-[#7A8FA8]">
+                <p className="mt-1.5 text-[13px] leading-relaxed text-hx-slate">
                     {archetype.pain}
                 </p>
             </div>
 
             {/* Shift */}
-            <p className="mb-3 text-[13px] leading-relaxed text-[#B8C5D6]">
+            <p className="mb-3 text-[13px] leading-relaxed text-hx-chrome">
                 {archetype.shift}
             </p>
 
@@ -297,7 +297,7 @@ function BeforeAfterStrip({ rows }: { rows: BeforeAfterRow[] }) {
 
             {/* Column headers */}
             <div className="relative grid grid-cols-[1fr_32px_1fr] items-center border-b border-white/[0.06] px-5 py-3 sm:px-7">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-[#3A4E68]">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-hx-dim">
                     Before
                 </p>
                 <div /> {/* spacer */}
@@ -317,14 +317,14 @@ function BeforeAfterStrip({ rows }: { rows: BeforeAfterRow[] }) {
                     >
                         <div className="grid grid-cols-[1fr_32px_1fr] items-center gap-0 px-5 py-4 sm:px-7">
                             {/* Before */}
-                            <p className="pr-3 text-[13px] leading-relaxed text-[#7A8FA8] sm:text-sm">
+                            <p className="pr-3 text-[13px] leading-relaxed text-hx-slate sm:text-sm">
                                 {row.before}
                             </p>
 
                             {/* Arrow divider */}
                             <div className="flex items-center justify-center" aria-hidden="true">
                                 <svg
-                                    className="h-4 w-4 text-[#3A4E68]"
+                                    className="h-4 w-4 text-hx-dim"
                                     viewBox="0 0 16 16"
                                     fill="none"
                                 >
@@ -339,7 +339,7 @@ function BeforeAfterStrip({ rows }: { rows: BeforeAfterRow[] }) {
                             </div>
 
                             {/* After */}
-                            <p className="pl-3 text-[13px] leading-relaxed text-[#B8C5D6] sm:text-sm">
+                            <p className="pl-3 text-[13px] leading-relaxed text-hx-chrome sm:text-sm">
                                 {row.after}
                             </p>
                         </div>
@@ -366,8 +366,8 @@ function ProofRibbon({ metrics }: { metrics: ProofMetric[] }) {
                         <p className="text-3xl font-semibold tracking-tight text-[#F7FBFF] sm:text-4xl">
                             {metric.value}
                         </p>
-                        <p className="mt-1 text-sm font-medium text-[#B8C5D6]">{metric.label}</p>
-                        <p className="mt-2 text-[11px] leading-snug text-[#3A4E68]">
+                        <p className="mt-1 text-sm font-medium text-hx-chrome">{metric.label}</p>
+                        <p className="mt-2 text-[11px] leading-snug text-hx-dim">
                             {metric.qualifier}
                         </p>
                     </div>
@@ -397,8 +397,8 @@ function HonestQualifier({
                 className="absolute inset-y-5 left-0 w-0.5 rounded-full bg-[#3A4E68]/50"
                 aria-hidden="true"
             />
-            <p className="mb-1.5 text-sm font-semibold text-[#7A8FA8]">{heading}</p>
-            <p className="max-w-3xl text-sm leading-relaxed text-[#3A4E68]">{body}</p>
+            <p className="mb-1.5 text-sm font-semibold text-hx-slate">{heading}</p>
+            <p className="max-w-3xl text-sm leading-relaxed text-hx-dim">{body}</p>
         </div>
     );
 }
@@ -433,7 +433,7 @@ export default function AudienceFit() {
                                 <span className="h-1.5 w-1.5 rounded-full bg-[#818cf8] opacity-90" />
                                 <span className="h-1.5 w-1.5 rounded-full bg-[#34d399] opacity-90" />
                             </div>
-                            <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                            <span className="text-xs font-medium tracking-wide text-hx-chrome">
                                 {SECTION_COPY.eyebrow}
                             </span>
                         </div>
@@ -446,7 +446,7 @@ export default function AudienceFit() {
                     </AnimateIn>
 
                     <AnimateIn variants={fadeUp} delay={0.18} threshold={0.2}>
-                        <p className="mt-4 text-pretty text-base leading-relaxed text-[#7A8FA8] sm:text-lg">
+                        <p className="mt-4 text-pretty text-base leading-relaxed text-hx-slate sm:text-lg">
                             {SECTION_COPY.sub}
                         </p>
                     </AnimateIn>
@@ -473,7 +473,7 @@ export default function AudienceFit() {
                             <h3 className="text-lg font-semibold text-[#F7FBFF] sm:text-xl">
                                 The operational shift.
                             </h3>
-                            <p className="text-sm text-[#7A8FA8]">
+                            <p className="text-sm text-hx-slate">
                                 What changes when everything is connected.
                             </p>
                         </div>

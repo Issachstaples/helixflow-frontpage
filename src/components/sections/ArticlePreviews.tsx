@@ -164,7 +164,7 @@ function TagPill({
 /** Clock icon + read time */
 function ReadTime({ time }: { time: string }) {
     return (
-        <span className="flex items-center gap-1 text-[11px] text-[#3A4E68]">
+        <span className="flex items-center gap-1 text-[11px] text-hx-dim">
             <svg
                 className="h-3 w-3"
                 viewBox="0 0 12 12"
@@ -257,12 +257,12 @@ function FeaturedArticleCard({ article }: { article: ArticlePreview }) {
                         <TagPill label={article.tag} accent={article.accent} />
                         <ReadTime time={article.readTime} />
                         <span
-                            className="hidden text-[11px] text-[#3A4E68] sm:block"
+                            className="hidden text-[11px] text-hx-dim sm:block"
                             aria-hidden="true"
                         >
                             ·
                         </span>
-                        <span className="hidden text-[10px] font-medium uppercase tracking-widest text-[#3A4E68] sm:block">
+                        <span className="hidden text-[10px] font-medium uppercase tracking-widest text-hx-dim sm:block">
                             Featured
                         </span>
                     </div>
@@ -271,7 +271,7 @@ function FeaturedArticleCard({ article }: { article: ArticlePreview }) {
                         {article.title}
                     </h3>
 
-                    <p className="mt-3 max-w-prose text-sm leading-relaxed text-[#7A8FA8] sm:text-base">
+                    <p className="mt-3 max-w-prose text-sm leading-relaxed text-hx-slate sm:text-base">
                         {article.description}
                     </p>
 
@@ -341,7 +341,7 @@ function ArticleCard({ article }: { article: ArticlePreview }) {
                     </h3>
 
                     {/* Description */}
-                    <p className="mt-2.5 flex-1 text-[13px] leading-relaxed text-[#7A8FA8]">
+                    <p className="mt-2.5 flex-1 text-[13px] leading-relaxed text-hx-slate">
                         {article.description}
                     </p>
 
@@ -385,7 +385,7 @@ export default function ArticlePreviews() {
                             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-sm">
                                 {/* Pen nib icon */}
                                 <svg
-                                    className="h-3 w-3 text-[#7A8FA8]"
+                                    className="h-3 w-3 text-hx-slate"
                                     viewBox="0 0 12 12"
                                     fill="none"
                                     aria-hidden="true"
@@ -398,7 +398,7 @@ export default function ArticlePreviews() {
                                         strokeLinejoin="round"
                                     />
                                 </svg>
-                                <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                                <span className="text-xs font-medium tracking-wide text-hx-chrome">
                                     {SECTION_COPY.eyebrow}
                                 </span>
                             </div>
@@ -414,7 +414,7 @@ export default function ArticlePreviews() {
                         </AnimateIn>
 
                         <AnimateIn variants={fadeUp} delay={0.16} threshold={0.2}>
-                            <p className="mt-3 text-pretty text-base leading-relaxed text-[#7A8FA8]">
+                            <p className="mt-3 text-pretty text-base leading-relaxed text-hx-slate">
                                 {SECTION_COPY.sub}
                             </p>
                         </AnimateIn>
@@ -427,7 +427,7 @@ export default function ArticlePreviews() {
                             className={cn(
                                 "hidden sm:inline-flex items-center gap-1.5 self-end",
                                 "rounded-full border border-white/10 bg-white/[0.04] px-4 py-2",
-                                "text-sm font-medium text-[#B8C5D6] backdrop-blur-sm",
+                                "text-sm font-medium text-hx-chrome backdrop-blur-sm",
                                 "transition-all duration-200 hover:border-white/20 hover:bg-white/[0.07] hover:text-[#F7FBFF]",
                                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/50"
                             )}
@@ -469,7 +469,7 @@ export default function ArticlePreviews() {
                             className={cn(
                                 "inline-flex items-center gap-1.5",
                                 "rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5",
-                                "text-sm font-medium text-[#B8C5D6] backdrop-blur-sm",
+                                "text-sm font-medium text-hx-chrome backdrop-blur-sm",
                                 "transition-all duration-200 hover:border-white/20 hover:text-[#F7FBFF]",
                                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/50"
                             )}

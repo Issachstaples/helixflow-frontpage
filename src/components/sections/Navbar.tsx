@@ -71,7 +71,7 @@ function Brand() {
                 <p className="text-sm font-semibold text-[#F7FBFF] tracking-tight group-hover:text-[#2DBBEE] transition-colors duration-200">
                     HelixFlow
                 </p>
-                <p className="text-[10px] font-normal text-[#7A8FA8]">
+                <p className="text-[10px] font-normal text-hx-slate">
                     by Newport E-commerce
                 </p>
             </div>
@@ -87,7 +87,7 @@ function DesktopLinks() {
                 <a
                     key={link.href}
                     href={link.href}
-                    className="px-3 py-1.5 text-sm text-[#7A8FA8] hover:text-[#F7FBFF] transition-colors duration-150 rounded-md hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60"
+                    className="px-3 py-1.5 text-sm text-hx-slate hover:text-[#F7FBFF] transition-colors duration-150 rounded-md hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60"
                 >
                     {link.label}
                 </a>
@@ -105,7 +105,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (v: b
                     variant="ghost"
                     size="icon"
                     aria-label="Open navigation menu"
-                    className="md:hidden text-[#7A8FA8] hover:text-[#F7FBFF] hover:bg-white/[0.05]"
+                    className="md:hidden text-hx-slate hover:text-[#F7FBFF] hover:bg-white/[0.05]"
                 >
                     <HamburgerIcon />
                 </Button>
@@ -130,7 +130,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (v: b
                             key={link.href}
                             href={link.href}
                             onClick={() => onOpenChange(false)}
-                            className="px-3 py-2.5 text-sm text-[#7A8FA8] hover:text-[#F7FBFF] rounded-lg hover:bg-white/[0.05] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60"
+                            className="px-3 py-2.5 text-sm text-hx-slate hover:text-[#F7FBFF] rounded-lg hover:bg-white/[0.05] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60"
                         >
                             {link.label}
                         </a>

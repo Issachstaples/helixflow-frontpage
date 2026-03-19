@@ -83,7 +83,7 @@ function EyebrowBadge({ text }: { text: string }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DBBEE] opacity-60" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DBBEE]" />
             </span>
-            <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+            <span className="text-xs font-medium tracking-wide text-hx-chrome">
                 {text}
             </span>
         </div>
@@ -134,7 +134,7 @@ function CTARow({ ctas }: { ctas: HeroCTA[] }) {
                                 "motion-reduce:transition-none",
                             ]
                             : [
-                                "border border-white/10 bg-white/5 text-[#B8C5D6] backdrop-blur-sm",
+                                "border border-white/10 bg-white/5 text-hx-chrome backdrop-blur-sm",
                                 "hover:border-white/20 hover:bg-white/8 hover:text-[#F7FBFF]",
                                 "motion-reduce:transition-none",
                             ]
@@ -183,16 +183,16 @@ function MetaTags({
                     )}
                     aria-hidden="true"
                 />
-                <span className="text-xs text-[#7A8FA8]">{trustLine}</span>
+                <span className="text-xs text-hx-slate">{trustLine}</span>
             </div>
-            <span className="text-[#3A4E68] text-xs" aria-hidden="true">
+            <span className="text-hx-dim text-xs" aria-hidden="true">
                 ·
             </span>
             {items.map((m, i) => (
                 <span key={m.label} className="flex items-center gap-2">
-                    <span className="text-xs text-[#3A4E68]">{m.label}</span>
+                    <span className="text-xs text-hx-dim">{m.label}</span>
                     {i < items.length - 1 && (
-                        <span className="text-[#3A4E68] text-xs" aria-hidden="true">
+                        <span className="text-hx-dim text-xs" aria-hidden="true">
                             /
                         </span>
                     )}
@@ -433,7 +433,7 @@ function FloatingMetricCard({
         >
             <p
                 className={cn(
-                    "font-medium text-[#B8C5D6]",
+                    "font-medium text-hx-chrome",
                     small ? "text-[10px]" : "text-[11px]"
                 )}
             >
@@ -455,7 +455,7 @@ function FloatingMetricCard({
                             ? "text-emerald-400"
                             : deltaPositive === false
                                 ? "text-red-400"
-                                : "text-[#7A8FA8]"
+                                : "text-hx-slate"
                     )}
                 >
                     {delta}
@@ -537,7 +537,7 @@ export default function Hero() {
 
                         {/* Sub-copy */}
                         <motion.p
-                            className="max-w-[480px] text-pretty text-base leading-relaxed text-[#7A8FA8] sm:text-lg"
+                            className="max-w-[480px] text-pretty text-base leading-relaxed text-hx-slate sm:text-lg"
                             initial={reduced ? false : { opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={

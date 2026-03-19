@@ -218,7 +218,7 @@ function CapabilityPill({
             className={cn(
                 "inline-flex items-center rounded-full px-2.5 py-0.5",
                 "border border-white/[0.07] bg-white/[0.04]",
-                "text-[11px] font-medium tracking-wide text-[#B8C5D6]"
+                "text-[11px] font-medium tracking-wide text-hx-chrome"
             )}
         >
             <span
@@ -441,7 +441,7 @@ function PhaseCard({
                 <h3 className="text-base font-semibold leading-snug text-[#F7FBFF] sm:text-lg">
                     {phase.headline}
                 </h3>
-                <p className="text-sm leading-relaxed text-[#7A8FA8]">
+                <p className="text-sm leading-relaxed text-hx-slate">
                     {phase.description}
                 </p>
             </div>
@@ -511,7 +511,7 @@ export default function LifecycleRibbon() {
                             <line x1="8.5" y1="4" x2="12.5" y2="4" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
                             <circle cx="12.5" cy="4" r="1.5" fill="#10b981" fillOpacity="0.7" />
                         </svg>
-                        <span className="text-xs font-medium tracking-wide text-[#B8C5D6]">
+                        <span className="text-xs font-medium tracking-wide text-hx-chrome">
                             {SECTION_COPY.eyebrow}
                         </span>
                     </motion.div>
@@ -529,7 +529,7 @@ export default function LifecycleRibbon() {
                     </motion.h2>
 
                     <motion.p
-                        className="mt-4 text-pretty text-base leading-relaxed text-[#7A8FA8] sm:text-lg"
+                        className="mt-4 text-pretty text-base leading-relaxed text-hx-slate sm:text-lg"
                         initial={reduced ? false : { opacity: 0, y: 14 }}
                         animate={
                             isInView
@@ -579,16 +579,16 @@ export default function LifecycleRibbon() {
                             : reduced ? {} : { opacity: 0, y: 12 }
                     }
                 >
-                    <p className="text-center text-sm text-[#7A8FA8] sm:text-left">
+                    <p className="text-center text-sm text-hx-slate sm:text-left">
                         Every phase is connected.{" "}
-                        <span className="text-[#B8C5D6]">Data flows forward — nothing falls through.</span>
+                        <span className="text-hx-chrome">Data flows forward — nothing falls through.</span>
                     </p>
                     <a
                         href="#modules"
                         className={cn(
                             "inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg px-4 py-2",
                             "border border-white/10 bg-white/[0.04] backdrop-blur-sm",
-                            "text-sm font-medium text-[#B8C5D6] transition-all duration-150",
+                            "text-sm font-medium text-hx-chrome transition-all duration-150",
                             "hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F7FBFF]",
                             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/50",
                             "motion-reduce:transition-none"
