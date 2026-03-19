@@ -36,6 +36,7 @@
  *   - What to look for in a CRM for service businesses
  */
 
+import Link from "next/link";
 import AnimateIn from "@/components/primitives/AnimateIn";
 import { fadeUp, fadeUpSlow, staggerContainer, stagger } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -212,7 +213,7 @@ function ArrowIcon({ className }: { className?: string }) {
 function FeaturedArticleCard({ article }: { article: ArticlePreview }) {
     return (
         <article aria-label={article.title}>
-            <a
+            <Link
                 href={article.href}
                 className={cn(
                     "group relative flex flex-col gap-5 overflow-hidden rounded-2xl p-6 sm:flex-row sm:items-start sm:gap-8 sm:p-8",
@@ -284,7 +285,7 @@ function FeaturedArticleCard({ article }: { article: ArticlePreview }) {
                         <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
                     </div>
                 </div>
-            </a>
+            </Link>
         </article>
     );
 }
@@ -296,7 +297,7 @@ function FeaturedArticleCard({ article }: { article: ArticlePreview }) {
 function ArticleCard({ article }: { article: ArticlePreview }) {
     return (
         <article aria-label={article.title}>
-            <a
+            <Link
                 href={article.href}
                 className={cn(
                     "group relative flex h-full flex-col overflow-hidden rounded-2xl p-5",
@@ -354,7 +355,7 @@ function ArticleCard({ article }: { article: ArticlePreview }) {
                         <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
                     </div>
                 </div>
-            </a>
+            </Link>
         </article>
     );
 }
@@ -422,7 +423,7 @@ export default function ArticlePreviews() {
 
                     {/* Desktop browse CTA — aligned to heading baseline */}
                     <AnimateIn variants={fadeUp} delay={0.2} threshold={0.2}>
-                        <a
+                        <Link
                             href={SECTION_COPY.ctaHref}
                             className={cn(
                                 "hidden sm:inline-flex items-center gap-1.5 self-end",
@@ -434,7 +435,7 @@ export default function ArticlePreviews() {
                         >
                             {SECTION_COPY.cta}
                             <ArrowIcon />
-                        </a>
+                        </Link>
                     </AnimateIn>
                 </header>
 
@@ -464,7 +465,7 @@ export default function ArticlePreviews() {
                 </AnimateIn>                {/* ── Mobile browse CTA ─────────────────────────────────────── */}
                 <AnimateIn variants={fadeUp} threshold={0.1}>
                     <div className="mt-8 flex justify-center sm:hidden">
-                        <a
+                        <Link
                             href={SECTION_COPY.ctaHref}
                             className={cn(
                                 "inline-flex items-center gap-1.5",
@@ -476,7 +477,7 @@ export default function ArticlePreviews() {
                         >
                             {SECTION_COPY.cta}
                             <ArrowIcon />
-                        </a>
+                        </Link>
                     </div>
                 </AnimateIn>
 
