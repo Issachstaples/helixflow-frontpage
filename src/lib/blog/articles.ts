@@ -17,17 +17,12 @@
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-export type BlockType = "heading" | "paragraph" | "list" | "callout" | "quote";
-
-export interface ContentBlock {
-    type: BlockType;
-    /** Plain text or heading content */
-    text?: string;
-    /** List items — used when type === "list" */
-    items?: string[];
-    /** Optional label for callout blocks */
-    label?: string;
-}
+export type ContentBlock =
+    | { type: "heading"; text: string }
+    | { type: "paragraph"; text: string }
+    | { type: "list"; items: string[] }
+    | { type: "callout"; title?: string; text: string }
+    | { type: "quote"; text: string; attribution?: string };
 
 export interface Article {
     slug: string;
@@ -98,7 +93,7 @@ export const ARTICLES: Article[] = [
             },
             {
                 type: "callout",
-                label: "The key distinction",
+                title: "The key distinction",
                 text: "Passive CRMs store data. AI-assisted CRMs act on it. The difference is whether the system surfaces the right thing at the right time — or waits for you to go find it.",
             },
             {
@@ -200,7 +195,7 @@ export const ARTICLES: Article[] = [
             },
             {
                 type: "callout",
-                label: "The pattern",
+                title: "The pattern",
                 text: "Each of these breakpoints has the same root cause: the process relies on a person holding context in their head rather than the system holding it on their behalf.",
             },
             {
@@ -293,7 +288,7 @@ export const ARTICLES: Article[] = [
             },
             {
                 type: "callout",
-                label: "The number",
+                title: "The number",
                 text: "At a blended billing rate of £80–120/hour, that's £8,000–£16,000 in time cost annually — before accounting for missed revenue from dropped follow-ups.",
             },
             {
@@ -404,7 +399,7 @@ export const ARTICLES: Article[] = [
             },
             {
                 type: "callout",
-                label: "The outcome",
+                title: "The outcome",
                 text: "End-to-end time from signed-off scope to proposal in the client's inbox: under 30 minutes. That's an 80–90% reduction in proposal creation time.",
             },
             {
@@ -500,7 +495,7 @@ export const ARTICLES: Article[] = [
             },
             {
                 type: "callout",
-                label: "The rule of thumb",
+                title: "The rule of thumb",
                 text: "If the right response depends on understanding this specific client's situation right now — automate the prompt, not the message. Let the AI surface the moment; let a human own the communication.",
             },
             {
@@ -621,7 +616,7 @@ export const ARTICLES: Article[] = [
             },
             {
                 type: "callout",
-                label: "The evaluation shortcut",
+                title: "The evaluation shortcut",
                 text: "Ask vendors: 'Show me the flow from a signed contract to the client receiving their first onboarding email.' If the answer involves manual steps, a separate tool, or a Zapier connection — you've found the gap.",
             },
             {
