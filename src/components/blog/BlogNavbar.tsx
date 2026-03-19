@@ -9,6 +9,7 @@
  * Server component — no interactivity needed.
  */
 
+import Link from "next/link";
 import LogoMark from "@/components/primitives/LogoMark";
 
 interface BlogNavbarProps {
@@ -28,7 +29,7 @@ export default function BlogNavbar({ showBack = false }: BlogNavbarProps) {
         >
             <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3.5 sm:px-6">
                 {/* Brand */}
-                <a
+                <Link
                     href="/"
                     className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60"
                     aria-label="HelixFlow — go to homepage"
@@ -37,12 +38,12 @@ export default function BlogNavbar({ showBack = false }: BlogNavbarProps) {
                     <span className="text-sm font-semibold tracking-tight text-[#F7FBFF]">
                         HelixFlow
                     </span>
-                </a>
+                </Link>
 
                 {/* Right side */}
                 <nav aria-label="Blog navigation" className="flex items-center gap-4">
                     {showBack && (
-                        <a
+                        <Link
                             href="/blog"
                             className="flex items-center gap-1.5 text-sm text-hx-slate transition-colors duration-150 hover:text-[#F7FBFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DBBEE]/60 rounded"
                         >
@@ -61,7 +62,7 @@ export default function BlogNavbar({ showBack = false }: BlogNavbarProps) {
                                 />
                             </svg>
                             All articles
-                        </a>
+                        </Link>
                     )}
                     <a
                         href="/#cta"

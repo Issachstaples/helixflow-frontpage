@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 function BlockHeading({ text }: { text: string }) {
     return (
-        <h2 className="mb-4 mt-10 text-xl font-semibold leading-snug tracking-tight text-[#F7FBFF] first:mt-0 sm:text-2xl">
+        <h2 className="mb-4 mt-10 text-xl font-semibold leading-snug tracking-tight text-[#F7FBFF] sm:text-2xl">
             {text}
         </h2>
     );

@@ -43,7 +43,7 @@ function ArticleCTA() {
     return (
         <aside
             className={cn(
-                "mt-14 rounded-2xl px-7 py-8",
+                "relative mt-14 rounded-2xl px-7 py-8",
                 "border border-[#2DBBEE]/20 border-t-[#2DBBEE]/40",
                 "bg-[rgba(15,33,69,0.55)] backdrop-blur-xl",
                 "shadow-[0_1px_0_0_rgba(45,187,238,0.08)_inset]"
@@ -152,7 +152,7 @@ export default function BlogPostLayout({ article }: { article: Article }) {
                     </p>
 
                     {/* ── Body ────────────────────────────────────────────────────────── */}
-                    <div className="prose-none">
+                    <div className="[&>*:first-child]:mt-0">
                         {article.body.map((block, i) => renderBlock(block, i))}
                     </div>
 

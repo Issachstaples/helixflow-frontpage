@@ -54,7 +54,7 @@ export async function generateMetadata({
             type: "article",
             url,
             siteName: "HelixFlow",
-            publishedTime: article.publishedAt,
+            publishedTime: new Date(article.publishedAt).toISOString(),
             tags: [article.tag],
         },
         twitter: {
