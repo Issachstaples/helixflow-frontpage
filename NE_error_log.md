@@ -19,6 +19,45 @@ HelixFlow and Newport E-commerce development, along with root causes and fixes.
 
 ---
 
+### [2026-03-19] Tailwind `first:` pseudo-class ineffective on component wrapper output
+
+**Error:** No visible error — silent rendering bug (first heading always had `mt-10` top margin)  
+**File:** `src/components/blog/RenderContentBlocks.tsx` / `src/components/blog/BlogPostLayout.tsx`  
+**Trigger:** `first:mt-0` applied to the `h2` inside `BlockHeading`  
+**Root cause:**  
+Tailwind's `first:` pseudo-class targets the element when it is the `:first-child`
+of its parent in the DOM. Because `renderBlock` returns the `<h2>` wrapped in a
+React function component (`BlockHeading`), React renders the component's output
+directly — but the `<h2>` is not literally the first child of the `prose-none`
+container from the browser's perspective unless it truly is the first DOM node.
+More importantly, when other block types (e.g. a `paragraph`) precede the heading
+in the array, the `<h2>` is never `:first-child` and the rule never fires. Even
+when the heading *is* first, the `first:` selector on the element itself does not
+reliably pierce function component boundaries in all Tailwind JIT scenarios.
+
+**Fix:**  
+Removed `first:mt-0` from the `h2` in `BlockHeading`. Applied the equivalent
+behaviour to the parent container in `BlogPostLayout`:
+
+```tsx
+// Before
+<div className="prose-none">
+
+// After
+<div className="[&>*:first-child]:mt-0">
+```
+
+The `[&>*:first-child]` arbitrary variant correctly targets the first rendered
+child of the container regardless of which block type it is.
+
+**Prevention:**  
+Do not use `first:` or `last:` on elements inside React function components when
+the intent is to target their position within a dynamically-rendered list. Apply
+the variant to the *parent container* using `[&>*:first-child]` / `[&>*:last-child]`
+arbitrary variants instead.
+
+---
+
 ### [2026-03-08] Invalid input: not a Zod schema
 
 **Error:** `Invalid input: not a Zod schema`  

@@ -5,6 +5,79 @@ HelixFlow marketing site (`helixflow-frontpage`). Ordered newest-first.
 
 ---
 
+## [2026-03-19] Blog system implementation, refactor, and QA pass
+
+### Added
+- `src/lib/blog/articles.ts` — typed local article data source; 6 full articles;
+  `ContentBlock` discriminated union; `Article` interface; `getArticleBySlug`,
+  `getAllSlugs`, `formatDate` helpers
+- `src/app/blog/page.tsx` — `/blog` index: featured card + 5-card grid, full SEO metadata
+- `src/app/blog/[slug]/page.tsx` — dynamic post route: `generateStaticParams` (6 slugs),
+  `generateMetadata` (title, description, OG `article:*`, Twitter, canonical), `notFound()`
+- `src/components/blog/BlogNavbar.tsx` — sticky blog top bar (`showBack` prop)
+- `src/components/blog/BlogPostLayout.tsx` — post template (header, excerpt, body, CTA)
+- `src/components/blog/RenderContentBlocks.tsx` — shared block renderer; exhaustive
+  discriminated union switch; exports `renderBlock` + default `<RenderContentBlocks>`
+- `src/components/blog/BlogIndexCard.tsx` — extracted article grid card component
+
+### Changed
+- `src/components/sections/ArticlePreviews.tsx` — all 4 `<a href>` tags upgraded to
+  `<Link>` for Next.js prefetch (2 article cards + 2 CTA buttons)
+- `src/components/blog/BlogNavbar.tsx` — logo and back-link converted from `<a>` to
+  `<Link>`; `Get started` (hash anchor) left as `<a>`
+
+### Fixed
+- `ArticleCTA` `<aside>` missing `relative` — absolute-positioned top accent line
+  would escape its container
+- OG `publishedTime` was a bare date string (`YYYY-MM-DD`); wrapped with
+  `new Date(article.publishedAt).toISOString()` for full RFC 3339 compliance
+- `first:mt-0` on `BlockHeading` `h2` was unreachable via Tailwind's `first:`
+  pseudo-class (targets DOM siblings, not component wrappers); moved to
+  `[&>*:first-child]:mt-0` on the body container in `BlogPostLayout`
+
+### Content model — `ContentBlock` discriminated union
+```ts
+export type ContentBlock =
+  | { type: "heading";   text: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list";      items: string[] }
+  | { type: "callout";   title?: string; text: string }
+  | { type: "quote";     text: string; attribution?: string };
+```
+All 6 callout blocks updated: `label:` → `title:`. `BlockType` union export removed.
+No non-null assertions anywhere in the renderer — type narrowing is exhaustive.
+
+### Route map
+```
+/blog                                → BlogIndexPage (static)
+/blog/ai-crm-for-agencies            → BlogPostPage (static)
+/blog/lead-to-delivery-workflow      → BlogPostPage (static)
+/blog/crm-vs-spreadsheets-service-business → BlogPostPage (static)
+/blog/proposal-automation-agencies   → BlogPostPage (static)
+/blog/ai-summaries-followups         → BlogPostPage (static)
+/blog/crm-buying-guide-service-business    → BlogPostPage (static)
+/blog/<unknown>                      → notFound() → 404
+```
+
+### CMS migration path
+All article data is isolated in `src/lib/blog/articles.ts`. To migrate to a CMS:
+1. Replace `ARTICLES` with a `fetch()` call in a server component
+2. Keep the `Article` type as the shared contract
+3. `BlogPostLayout`, `RenderContentBlocks`, `BlogIndexCard`, `BlogNavbar` — no changes needed
+
+### Verified
+- TypeScript: zero errors (`npx tsc --noEmit`)
+- All 6 routes resolve, unknown slugs return 404
+- All homepage article links match real slugs
+- OG metadata confirmed on all 6 article pages
+
+### Commits
+- `816fdb4` — `feat: blog system — article data, index page, post template, 6 static routes`
+- `6a92886` — `refactor: blog — discriminated union ContentBlock, extract RenderContentBlocks and BlogIndexCard`
+- `3db1cd6` — `fix: blog QA pass — aside relative, BlogNavbar Link, OG publishedTime ISO, first heading margin`
+
+---
+
 ## [2026-03-08] Waitlist flow integration, Resend wiring, schema fix
 
 ### Added

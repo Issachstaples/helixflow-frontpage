@@ -110,7 +110,81 @@ Required in both development and production. If missing, form returns a typed er
 
 ---
 
+## Blog system (complete — shipped 2026-03-19)
+
+### File structure
+```
+src/lib/blog/articles.ts                  — data source, types, helpers
+src/app/blog/page.tsx                     — /blog index (static)
+src/app/blog/[slug]/page.tsx              — /blog/[slug] (static, 6 routes)
+src/components/blog/BlogNavbar.tsx        — sticky top bar (showBack prop)
+src/components/blog/BlogPostLayout.tsx    — post template
+src/components/blog/RenderContentBlocks.tsx — shared block renderer
+src/components/blog/BlogIndexCard.tsx     — article grid card
+```
+
+### Route map
+```
+/blog                                      → BlogIndexPage
+/blog/ai-crm-for-agencies                 → BlogPostPage
+/blog/lead-to-delivery-workflow           → BlogPostPage
+/blog/crm-vs-spreadsheets-service-business → BlogPostPage
+/blog/proposal-automation-agencies        → BlogPostPage
+/blog/ai-summaries-followups              → BlogPostPage
+/blog/crm-buying-guide-service-business   → BlogPostPage
+/blog/<unknown>                           → notFound() → 404
+```
+
+### ContentBlock type
+```ts
+export type ContentBlock =
+  | { type: "heading";   text: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list";      items: string[] }
+  | { type: "callout";   title?: string; text: string }
+  | { type: "quote";     text: string; attribution?: string };
+```
+Discriminated union — exhaustive switch in `renderBlock`, no non-null assertions.
+
+### Metadata (per article)
+`title`, `description`, `openGraph` (type `article`, `publishedTime` ISO 8601,
+`tags`), `twitter`, `alternates.canonical`. Falls back `metaDescription → excerpt`.
+
+### CMS migration path
+All content is in `articles.ts`. Replace `ARTICLES` with a `fetch()`. The
+`Article` type is the shared contract — no layout or renderer changes needed.
+
+---
+
 ## Session notes
+
+### 2026-03-19 — Blog system implementation, refactor, and QA pass
+
+**Completed this session:**
+
+1. **Blog system built** — `/blog` index, 6 static article routes, `BlogNavbar`,
+   `BlogPostLayout`, `RenderContentBlocks`, `BlogIndexCard`. All routes resolve;
+   unknown slugs return 404.
+
+2. **ContentBlock upgraded to discriminated union** — replaced interface-with-optionals.
+   All 6 callout blocks updated (`label:` → `title:`). `BlockType` union removed.
+   Renderer switch is now exhaustive with zero non-null assertions.
+
+3. **Components extracted** — `RenderContentBlocks.tsx` and `BlogIndexCard.tsx`
+   separated from inline code in `BlogPostLayout` and `blog/page.tsx`.
+
+4. **QA pass** — 4 bugs found and fixed:
+   - `ArticleCTA <aside>` missing `relative` (absolute accent line escaped container)
+   - `BlogNavbar` logo/back links were plain `<a>` for internal routes → `<Link>`
+   - OG `publishedTime` was bare date string → full ISO 8601
+   - `first:mt-0` on `h2` unreachable via Tailwind `first:` → moved to parent `[&>*:first-child]:mt-0`
+
+5. **ArticlePreviews** on homepage — all 4 `<a href>` upgraded to `<Link>`.
+
+**Commits:** `816fdb4`, `6a92886`, `3db1cd6`
+**Current state:** TypeScript clean, all routes verified, pushed to `main` on GitHub.
+
+---
 
 ### 2026-03-08 — n8n webhook migration + production wiring
 
@@ -171,6 +245,6 @@ end-to-end verified in test mode.
 - [ ] Replace manual stagger delays with `staggerChild(i)`
 - [ ] Add navbar active-state on scroll (IntersectionObserver)
 - [ ] Lighthouse / accessibility pass
-- [ ] Plan `/updates` or `/blog` route
+- [x] ~~Plan `/updates` or `/blog` route~~ — blog system shipped (2026-03-19)
 
 ---
